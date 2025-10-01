@@ -525,3 +525,41 @@
     }
   });
 })();
+
+document.addEventListener('DOMContentLoaded', () => {
+  const sidebar = document.querySelector('.nav-inner');
+  let hideTimer;
+  const INACTIVE_TIME = 5000; // 5秒後に隠れる
+
+  // サイドバーを隠す
+  function hideSidebar() {
+    sidebar.classList.add('hidden');
+  }
+
+  // サイドバーを表示し、再びタイマーをセット
+  function showSidebar() {
+    sidebar.classList.remove('hidden');
+    resetTimer();
+  }
+
+  // タイマーをリセット
+  function resetTimer() {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(hideSidebar, INACTIVE_TIME);
+  }
+
+  // ページ読み込み時にタイマーを開始
+  resetTimer();
+
+  // ユーザー操作（マウス移動・クリック・キー押下など）を検知して表示
+  ['mousemove', 'keydown', 'click', 'scroll'].forEach(event => {
+    document.addEventListener(event, showSidebar);
+  });
+
+  // 左端にマウスが近づいたらサイドバーを表示
+  document.addEventListener('mousemove', (e) => {
+    if (e.clientX < 30) { // 左端30px以内
+      showSidebar();
+    }
+  });
+});

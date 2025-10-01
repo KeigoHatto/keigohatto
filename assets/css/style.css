@@ -1345,3 +1345,17 @@ h2 {
   margin-left: 0 !important;   /* 左にずらしていたマイナスをリセット */
   padding-left: 10px;          /* 少し余白を追加（任意で調整） */
 }
+
+
+/* サイドバーが自動的に隠れる時のスタイル */
+.nav-inner.hidden {
+  transform: translateX(-100%);     /* 左側に隠す */
+  transition: transform 0.5s ease;  /* スライドアニメーション */
+  opacity: 0;
+}
+
+/* 表示する時のアニメーション */
+.nav-inner {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 1;
+}
