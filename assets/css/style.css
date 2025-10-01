@@ -1332,3 +1332,16 @@ footer {
     width: 40.972vw
   }
 }
+
+/* ----------- 受賞歴リストの修正 ----------- */
+.profile-history-li,
+.profile-history-li li {
+  list-style: none;        /* 点を消す */
+  margin: 0;
+  padding: 0;
+}
+/* ----------- 見出しがサイドバーに隠れないように修正 ----------- */
+h2 {
+  margin-left: 0 !important;   /* 左にずらしていたマイナスをリセット */
+  padding-left: 10px;          /* 少し余白を追加（任意で調整） */
+}
