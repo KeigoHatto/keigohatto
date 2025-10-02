@@ -563,3 +563,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// --- お問い合わせボタンでメールアドレスをコピーする ---
+document.addEventListener('DOMContentLoaded', () => {
+  const copyButton = document.getElementById('contact-btn');
+  const tagText = document.getElementById('tagText');
+  const message = document.getElementById('message');
+
+  copyButton.addEventListener('click', () => {
+    // クリップボードAPIが使える場合
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(tagText.value)
+        .then(() => {
+          showMessage();
+        })
+        .catch(() => {
+          fallbackCopy();
+        });
+    } else {
+      // 古いブラウザ向けフォールバック
+      fallbackCopy();
+    }
+  });
+
+  function fallbackCopy() {
+    tagText.hidden = false;          // 一時的に表示
+    tagText.select();
+    document.execCommand('copy');    // 古いAPIでコピー
+    tagText.hidden = true;           // 再び隠す
+    showMessage();
+  }
+
+  // 「コピーしました」メッセージ表示
+  function showMessage() {
+    message.style.display = 'inline-block';
+    setTimeout(() => {
+      message.style.display = 'none';
+    }, 2000);  // 2秒後に非表示
+  }
+});

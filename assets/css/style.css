@@ -1359,3 +1359,33 @@ h2 {
   transition: transform 0.5s ease, opacity 0.5s ease;
   opacity: 1;
 }
+
+/* リンクを最前面に */
+.list-item a {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+/* 「もっと見る」ボタンのクリック領域を最小化 */
+.load-more {
+  z-index: 1;                 /* リンクより下にする */
+  pointer-events: auto;       /* ボタン自体はクリックできる */
+}
+
+/* ボタン以外の透明な領域を無効化 */
+.load-more svg {
+  pointer-events: none;       /* アイコン以外の透明部分はクリックを通す */
+}
+
+/* メッセージはデフォルトでは隠しておく */
+#message {
+  display: none;
+  margin-left: 8px;
+  color: #2269D3;
+  font-size: 0.9rem;
+}
+
+#message .check {
+  margin-right: 4px;
+}
