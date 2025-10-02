@@ -1389,3 +1389,17 @@ h2 {
 #message .check {
   margin-right: 4px;
 }
+
+/* メッセージの初期設定（デフォルトは非表示） */
+#message {
+  display: none;
+  align-items: center;
+  margin-left: 8px;
+  color: #2269D3;
+  font-size: 0.9rem;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#message .check {
+  margin-right: 4px;
+}

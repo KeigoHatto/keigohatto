@@ -564,41 +564,51 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// --- お問い合わせボタンでメールアドレスをコピーする ---
+// ==============================
+// お問い合わせボタンでメールアドレスをコピー＆メッセージ表示
+// ==============================
 document.addEventListener('DOMContentLoaded', () => {
-  const copyButton = document.getElementById('contact-btn');
-  const tagText = document.getElementById('tagText');
-  const message = document.getElementById('message');
+  // 要素を取得
+  const copyButton = document.getElementById('contact-btn'); // お問い合わせボタン
+  const tagText = document.getElementById('tagText');       // コピーしたいメールアドレスが入っているinput
+  const message = document.getElementById('message');       // 「コピーしました」メッセージを表示する場所
 
+  // ボタンクリック時の処理
   copyButton.addEventListener('click', () => {
-    // クリップボードAPIが使える場合
+    // まずメールアドレスをコピーする
     if (navigator.clipboard) {
+      // 新しいクリップボードAPI
       navigator.clipboard.writeText(tagText.value)
         .then(() => {
-          showMessage();
+          showMessage();   // 成功したらメッセージを表示
         })
         .catch(() => {
-          fallbackCopy();
+          fallbackCopy();  // エラーが出たら古い方法でコピー
         });
     } else {
-      // 古いブラウザ向けフォールバック
-      fallbackCopy();
+      fallbackCopy();      // 古いブラウザの場合
     }
   });
 
+  // 古い方法：一時的にinputを表示してコピー
   function fallbackCopy() {
-    tagText.hidden = false;          // 一時的に表示
-    tagText.select();
-    document.execCommand('copy');    // 古いAPIでコピー
-    tagText.hidden = true;           // 再び隠す
-    showMessage();
+    tagText.hidden = false;         // inputを一瞬表示
+    tagText.select();               // 選択状態にする
+    document.execCommand('copy');   // コピー実行
+    tagText.hidden = true;          // もう一度隠す
+    showMessage();                  // メッセージ表示
   }
 
-  // 「コピーしました」メッセージ表示
+  // メッセージを表示する関数
   function showMessage() {
-    message.style.display = 'inline-block';
+    message.style.display = 'inline-flex';   // 表示
+    message.style.visibility = 'visible';
+    message.style.opacity = '1';
+
+    // 2秒後に非表示に戻す
     setTimeout(() => {
       message.style.display = 'none';
-    }, 2000);  // 2秒後に非表示
+    }, 2000);
   }
 });
+
